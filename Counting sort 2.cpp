@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> arr(n), output(n);
+    int aux[100] = {0};
+    int cum[100];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+        aux[arr[i]]++;
+    }
+    cum[0] = aux[0];
+    for (int i = 1; i < 100; i++)
+        cum[i] = cum[i - 1] + aux[i];
+    for (int i = n - 1; i >= 0; i--)
+    {
+        output[cum[arr[i]] - 1] = arr[i];
+        cum[arr[i]]--;
+    }
+    for (int i = 0; i < n; i++)
+        cout << output[i] << " ";
+    return 0;
+}
